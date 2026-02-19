@@ -19,16 +19,20 @@ The goal of this project is to automatically decide which attributes should be t
 
 The main goals of this project are to:
 
-1. Build a high-quality labeled gold dataset from pre-matched place pairs. The golden dataset will have a "golden" value for the following attributes:
-- Names
-- Categories
-- Websites
-- Socials
-- Emails
-- Phone Numbers
-- Brands
-- Addresses
-The gold value for each attribute is the one that is most accurate in the pair given.
+1. **Build a high-quality labeled gold dataset from pre-matched place pairs.**
+
+   The golden dataset will contain a **"gold" value** for each of the following attributes:
+
+   - **Names**
+   - **Categories**
+   - **Websites**
+   - **Socials**
+   - **Emails**
+   - **Phone Numbers**
+   - **Brands**
+   - **Addresses**
+
+   The **gold value** for each attribute is the value that is **most accurate within the given pair**.
 
 2. Design an algorithm that can select the best attribute values when multiple candidates exist.
 3. Compare rule-based and machine-learning approaches.
