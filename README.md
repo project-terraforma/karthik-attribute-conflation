@@ -32,7 +32,7 @@ The main goals of this project are to:
    - **Brands**
    - **Addresses**
 
-   The **gold value** for each attribute is the value that is **most accurate within the given pair**.
+   The **gold value** for each attribute is the value that is **most accurate within the given pair**. (L = Left, R = Right, B = Both, N = Neither)
 
 2. Design an algorithm that can select the best attribute values when multiple candidates exist.
 3. Compare rule-based and machine-learning approaches.
