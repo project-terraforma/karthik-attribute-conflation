@@ -63,6 +63,42 @@ The method evaluates candidate values using attribute-specific heuristics such a
 
 When two values are similar in quality, the algorithm applies **source reliability and confidence scores as tie-breakers**.
 
+## Attribute Conflation Rules
+
+| Attribute | Key Rules Used for Selection |
+|---|---|
+| **Names** | Normalize case and punctuation. If normalized names match → **B (Both)**. If names share ≥80% token similarity → **B**. Otherwise prefer names that are more descriptive (more words / reasonable length). |
+| **Categories** | Compare the **primary category**. If both match → **B**. Prefer non-empty categories and slightly prefer more specific categories (more hierarchical tokens). |
+| **Websites** | Normalize URLs (remove protocol, `www`, trailing slashes). If canonical domains match → **B**. Prefer **HTTPS**, penalize URL shorteners (e.g., `bit.ly`), penalize social domains when evaluating websites, prefer cleaner/shorter URLs. |
+| **Socials** | Normalize URLs and compare canonical domains. If domains match → **B**. Penalize shortened links but allow social domains. |
+| **Emails** | Prefer valid email format. Prefer **business domain emails** over free providers (e.g., Gmail, Yahoo). If identical emails → **B**. |
+| **Phones** | Normalize phone numbers by removing punctuation. If digits match → **B**. Prefer numbers starting with **+ (E.164 format)** and numbers with valid length (10–15 digits). |
+| **Brand** | Extract brand name from the structured field. If both empty → **N (Neither)**. If only one exists → choose that side. If normalized brand names match → **B**. |
+| **Addresses** | Compare normalized address strings. If normalized addresses match → **B**. Prefer addresses with **more complete components** (street, locality, region, postcode, country). Slight preference for longer postal codes (e.g., ZIP+4). |
+| **Tie Breaking** | If two scores are very close, use **source reliability + confidence score** to decide the winner. |
+
+---
+
+## Default Decision Rules
+
+| Situation | Decision |
+|---|---|
+| Both values empty | **N (Neither)** |
+| Only left value exists | **L (Left)** |
+| Only right value exists | **R (Right)** |
+| Values equal after normalization | **B (Both)** |
+
+---
+
+## Label Definitions
+
+| Label | Meaning |
+|---|---|
+| **L** | Left value is better |
+| **R** | Right value is better |
+| **B** | Both values are equivalent |
+| **N** | Neither value is useful |
+
 ---
 
 ### 3. Evaluate Algorithm Performance
